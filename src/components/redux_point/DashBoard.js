@@ -1,5 +1,5 @@
-import { Button, Card, Row, Col, Image } from 'antd'
-import React, { useState } from 'react'
+import { Button, Card, Row, Col, Image, Spin } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { mobileProducts } from './productsStore'
 import { ADD_TO_CART } from '../../Service/constrainsTypes'
 import { addShoppingCart, removeShoppingCart, viewCart } from '../../Service/Action/CartAction'
@@ -10,6 +10,8 @@ const DashBoard = ({ products }) => {
 
     const { index } = useParams("")
     console.log(index)
+
+
     const cartList = useSelector(state => state.shop.cartList)
 
     const dispatchHandler = useDispatch();
@@ -37,10 +39,23 @@ const DashBoard = ({ products }) => {
 
     }
 
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
+
+
     return (
         <>
-            <main className='mt-5'>
-                <div className='m-3 p-2 border'>
+            <main className='mt-3'>
+                {loading && <Spin size='large' fullscreen tip="Loading...." />}
+
+                <div className='m-3 p-2'>
                     <h4 className='text-left'>Mobiles</h4>
                     <div>
                         <Row gutter={[16, 16]} className=''>
@@ -56,7 +71,7 @@ const DashBoard = ({ products }) => {
                                         className='card-content text-decoration-none'
                                     >
                                         <Card hoverable
-
+                                            className='border'
                                             key={item.id}
                                             onClick={() => dispatchHandler(viewCart(item))}
                                         >

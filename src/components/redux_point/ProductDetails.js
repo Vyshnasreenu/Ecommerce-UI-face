@@ -1,13 +1,29 @@
-import { Button, Card, Col, Row } from 'antd'
-import React from 'react'
+import { Button, Card, Col, Image, Modal, Result, Row, Spin } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import ProductSpec from './ProductSpec'
 
 const ProductDetails = () => {
+    const [loading, setLoading] = useState(true)
+    const [flag, setFlag] = useState(false)
+
 
     const prodcutDetails = useSelector(state => state.details.prodcutDetails)
-    console.log(prodcutDetails, "product")
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const onMsgShower = () => {
+        setFlag(true)
+    }
+
     return (
         <div className='m-3'>
+            {loading && <Spin size='large' fullscreen tip="Loading...." />}
             <Row gutter={[24, 16]}>
                 <Col
                     span={24}
@@ -20,9 +36,13 @@ const ProductDetails = () => {
                         <div className='row'>
                             <div className='col'>
                                 <div className='row'>
-                                    <div className='col-md-4 border' style={{ border: " groove" }}>
-                                        <img src={prodcutDetails?.image}
-                                            height={window.innerWidth > 760 ? "500px" : "250px"} width="100%" className='mb-2' />
+                                    <div className='col-md-4 border-right' style={{ border: "" }}>
+                                        <Image.PreviewGroup
+                                            items={prodcutDetails.images}
+                                        >
+                                            <Image src={prodcutDetails?.image}
+                                                height={window.innerWidth > 760 ? "500px" : "250px"} width="100%" className='mb-2 border-bottom' />
+                                        </Image.PreviewGroup>
                                     </div>
                                     <div className='text-left my-2 px-2 col-md-6'
                                     >
@@ -32,52 +52,40 @@ const ProductDetails = () => {
                                             {prodcutDetails?.moreInfo}
                                         </div>
                                         <div className='row p-3'>
-                                            <Button className="bg-warning mx-2" color='default' variant='solid'>Go To Cart</Button>
-                                            <Button className='' color='primary' variant='solid'>Buy Now</Button>
+                                            <Button
+                                                className="bg-warning mx-2"
+                                                color='default'
+                                                variant='solid'
+                                                onClick={onMsgShower}
+                                            >
+                                                Go To Cart
+                                            </Button>
+                                            <Button
+                                                color='primary'
+                                                variant='solid'
+                                                onClick={onMsgShower}
+                                            >
+                                                Buy Now
+                                            </Button>
                                         </div>
-                                        <div className='p-1 mt-2'>
-                                            <h4>Specilization</h4>
-                                            <div className="">
-                                                <h6>Chipset : </h6>
-                                                {" "}
-                                                {prodcutDetails.ProcessorAndPerformance?.Chipset?.map((item, index) => (
-                                                    <ul>
-                                                        <li>
-                                                            <span> {item}</span>
-                                                        </li>
-                                                    </ul>
-                                                ))}
-                                            </div>
-                                            <div className="">
-                                                <h6>CPU : </h6>
-                                                {" "}
-                                                {prodcutDetails.ProcessorAndPerformance?.CPU?.map((item, index) => (
-                                                    <ul>
-                                                        <li>
-                                                            <span> {item}</span>
-                                                        </li>
-                                                    </ul>
-                                                ))}
-                                            </div>
-                                            <div className="">
-                                                <h6>Memory : </h6>
-                                                {" "}
-                                                {prodcutDetails.ProcessorAndPerformance?.Memory?.map((item, index) => (
-                                                    <ul>
-                                                        <li>
-                                                            <b>{item.name} </b>
-                                                            : {item.msg}
-                                                        </li>
-                                                    </ul>
-                                                ))}
-                                            </div>
-                                        </div>
-
-
+                                        <ProductSpec />
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {flag && (
+                            <Modal open={flag}
+                                footer={null}
+                                closable
+                                onCancel={() => setFlag(false)}
+                            >
+                                <Result
+                                    status="404"
+                                    subTitle="Sorry!, This page is currently under development...."
+                                    title="404"
+                                />
+                            </Modal>
+                        )}
                     </Card>
                 </Col>
             </Row>
