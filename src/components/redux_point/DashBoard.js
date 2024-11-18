@@ -55,23 +55,24 @@ const DashBoard = ({ products }) => {
             <main className='mt-3'>
                 {loading && <Spin size='large' fullscreen tip="Loading...." />}
 
-                <div className='m-3 p-2'>
+                <div className='m-2 p-2'>
                     <h4 className='text-left'>Mobiles</h4>
                     <div>
-                        <Row gutter={[16, 16]} className=''>
+                        <Row gutter={[16, 24]}>
 
                             {mobileProducts.map((item, index) => (
                                 <Col span={6} key={item.id}
                                     xs={24}   // Full width on extra-small screens (mobile)
-                                    sm={12}   // Two cards per row on small screens (tablets)
-                                    md={8}    // Three cards per row on medium screens (small desktops)
+                                    sm={10}   // Two cards per row on small screens (tablets)
+                                    md={12}    // Three cards per row on medium screens (small desktops)
                                     lg={6}  // Four cards per row on large screens
-                                    className='d-flex'>
+                                >
                                     <Link to={`/product/${item.name}`}
-                                        className='card-content text-decoration-none'
+                                        className='card- text-decoration-none'
                                     >
                                         <Card hoverable
-                                            className='border'
+                                            className=''
+                                            style={{ height: "100%", width: "100%" }}
                                             key={item.id}
                                             onClick={() => dispatchHandler(viewCart(item))}
                                         >
