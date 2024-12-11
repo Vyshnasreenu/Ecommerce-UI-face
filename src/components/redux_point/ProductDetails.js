@@ -8,14 +8,21 @@ const ProductDetails = () => {
     const [flag, setFlag] = useState(false)
 
 
-    const prodcutDetails = useSelector(state => state.details.prodcutDetails)
+    const [prodcutDetails, setState] = useState(useSelector((state) => state.details.prodcutDetails));
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 1000)
-        return () => clearTimeout(timer)
-    }, [])
+        const data = localStorage.getItem("product");
+        if (data) {
+            setState(JSON.parse(data))
+        }
+    }, [prodcutDetails == {}])
+
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000)
+    //     return () => clearTimeout(timer)
+    // }, [])
 
     const onMsgShower = () => {
         setFlag(true)
@@ -23,7 +30,7 @@ const ProductDetails = () => {
 
     return (
         <div className='m-3'>
-            {loading && <Spin size='large' fullscreen tip="Loading...." />}
+            {/* {loading && <Spin size='large' fullscreen tip="Loading...." />} */}
             <Row gutter={[24, 16]}>
                 <Col
                     span={24}

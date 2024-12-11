@@ -8,12 +8,7 @@ import { Link, useParams } from 'react-router-dom'
 
 const DashBoard = ({ products }) => {
 
-    const { index } = useParams("")
-    console.log(index)
-
-
     const cartList = useSelector(state => state.shop.cartList)
-
     const dispatchHandler = useDispatch();
 
 
@@ -39,21 +34,20 @@ const DashBoard = ({ products }) => {
 
     }
 
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 1000)
-        return () => clearTimeout(timer)
-    }, [])
-
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000)
+    //     return () => clearTimeout(timer)
+    // }, [])
 
 
     return (
         <>
             <main className='mt-3'>
-                {loading && <Spin size='large' fullscreen tip="Loading...." />}
+                {/* {loading && <Spin size='large' fullscreen tip="Loading...." />} */}
 
                 <div className='m-2 p-2'>
                     <h4 className='text-left'>Mobiles</h4>
@@ -68,7 +62,7 @@ const DashBoard = ({ products }) => {
                                     lg={6}  // Four cards per row on large screens
                                 >
                                     <Link to={`/product/${item.name}`}
-                                        className='card- text-decoration-none'
+                                        className='text-decoration-none'
                                     >
                                         <Card hoverable
                                             className=''

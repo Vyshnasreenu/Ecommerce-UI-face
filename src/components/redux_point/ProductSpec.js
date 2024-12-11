@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const ProductSpec = () => {
-    const prodcutDetails = useSelector(state => state.details.prodcutDetails)
 
+    const [prodcutDetails, setState] = useState(useSelector((state) => state.details.prodcutDetails));
+
+    useEffect(() => {
+        const data = localStorage.getItem("product");
+        if (data) {
+            setState(JSON.parse(data))
+        }
+    }, [prodcutDetails == {}])
     return (
         <div>
             <div className='p-2 mt-2'>

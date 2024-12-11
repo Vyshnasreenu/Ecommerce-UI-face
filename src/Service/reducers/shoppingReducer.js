@@ -117,6 +117,7 @@ const viewProduct = (state, data) => {
         // numberOfQuantity: state.numberOfQuantity + 1,
         // priceOfProduct: state.priceOfProduct * 2,
     }
+    localStorage.setItem("product", JSON.stringify(data))
     return updatedState;
 }
 
