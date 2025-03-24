@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 const ProductSpec = () => {
 
-    const [prodcutDetails, setState] = useState(useSelector((state) => state.details.prodcutDetails));
+    const [prodcutDetails, setState] = useState(useSelector((state) => state.shop.prodcutDetails));
 
     useEffect(() => {
         const data = localStorage.getItem("product");

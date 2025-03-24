@@ -7,10 +7,10 @@ const Home = ({ cartList, dispatch }) => {
 
 
     return (
-        <>
+        <div style={{ background: "#f8f9fa" }}>
             <NavBar />
             <DashBoard />
-        </>
+        </div>
     )
 }
 
