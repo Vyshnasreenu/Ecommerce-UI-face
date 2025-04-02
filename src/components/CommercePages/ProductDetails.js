@@ -10,10 +10,15 @@ const ProductDetails = () => {
   const [prodcutDetails, setState] = useState(
     useSelector((state) => state.shop.prodcutDetails)
   );
-
   const onMsgShower = () => {
     setFlag(true);
   };
+  useEffect(() => {
+    const data = localStorage.getItem("product");
+    if (data) {
+      setState(JSON.parse(data))
+    }
+  }, [])
 
   return (
     <div className="m-3">

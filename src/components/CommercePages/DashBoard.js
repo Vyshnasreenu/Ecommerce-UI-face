@@ -1,8 +1,7 @@
-import { Button, Card, Row, Col, Image, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import { Card, Row, Col, } from "antd";
 import { mobileProducts } from "./productsStore";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   addToCart,
   viewProductDet,

@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux'
 const ProductSpec = () => {
 
     const [prodcutDetails, setState] = useState(useSelector((state) => state.shop.prodcutDetails));
-
     useEffect(() => {
         const data = localStorage.getItem("product");
         if (data) {
+            console.log("first")
             setState(JSON.parse(data))
         }
-    }, [prodcutDetails == {}])
+    }, [])
     return (
         <div>
             <div className='p-2 mt-2'>
@@ -19,7 +19,7 @@ const ProductSpec = () => {
                     <h6><b>Chipset :</b> </h6>
                     {" "}
                     {prodcutDetails.ProcessorAndPerformance?.Chipset?.map((item, index) => (
-                        <ul>
+                        <ul key={item.id}>
                             <li>
                                 <span> {item}</span>
                             </li>

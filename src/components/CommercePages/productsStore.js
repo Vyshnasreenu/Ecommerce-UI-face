@@ -491,7 +491,7 @@ export const mobileProducts = [
     {
         id: "8",
         name: "Realme GT 3",
-        images: ["/images/Mobiles/RealmeGT32.png", "/images/Mobiles/RealmeGT3.png"], 
+        images: ["/images/Mobiles/RealmeGT32.png", "/images/Mobiles/RealmeGT3.png"],
         image: "/images/Mobiles/RealmeGT32.png",
         price: "45000",
         count: 0,
@@ -556,7 +556,8 @@ export const mobileProducts = [
             ]
         }
 
-    }
+    },
+
 
 
 ]

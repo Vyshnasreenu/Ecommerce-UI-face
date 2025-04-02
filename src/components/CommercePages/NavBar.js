@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import shopStyle from "../cart.css";
-import { useSelector } from "react-redux";
-import { Avatar, Badge, Button, Modal, Result } from "antd";
+import "../cart.css";
+import { Button, Modal, Result } from "antd";
 import { Link } from "react-router-dom";
 import SignUpPage from "../SignUpFiles/SignUpPage";
-import Login from "../SignUpFiles/Login";
 
 const NavBar = () => {
   // const storeField = useSelector((state) => state.details.storeField);
@@ -16,7 +14,7 @@ const NavBar = () => {
   const [userName, setUserName] = useState("");
   useEffect(() => {
     const name = sessionStorage.getItem("username");
-    // console.log(username, "userma");
+    console.log(name)
     if (name !== null) {
       setUserName(name);
       setChecking(true);
@@ -30,9 +28,14 @@ const NavBar = () => {
 
   const logoutHandler = () => {
     setIsLogin(true);
+    // sessionStorage.removeItem("username");
+    // window.location.reload(false);
+  };
+
+  const removeAccountHandler = () => {
     sessionStorage.removeItem("username");
     window.location.reload(false);
-  };
+  }
   return (
     <>
       <section className="parentNav">
@@ -40,7 +43,7 @@ const NavBar = () => {
           <div className="p-3">
             <div className="col">
               <div className="row">
-                <h3 className="col-md-6 text-left mt-2">
+                <h3 className="col-md-6  text-left mt-2">
                   <span className="titleNav p-1 ">
                     <Link to="/" className="titleNav">
                       <i class="fa-brands fa-kickstarter fa-2xl mx-1"></i>
@@ -48,10 +51,7 @@ const NavBar = () => {
                     </Link>
                   </span>
                 </h3>
-
-                {/* <div className='col-md-4 text-right'>
-                                </div> */}
-                <div className="col-md-6 d-flex justify-content-end mt-3">
+                <div className="col-md-6 text-right mt-3">
                   {!checking ? (
                     <h4>
                       <Button
@@ -65,37 +65,45 @@ const NavBar = () => {
                       </Button>
                     </h4>
                   ) : (
-                    <>
-                      <div className="text-white">
-                        Welcome{" "}
+                    <div className="d-flex justify-content-end">
+                      <div className="text-white mt-2 mr-2">
+                        <span> Welcome{" "}</span>
                         <span
-                          className="fs-3 fw-bold"
-                          style={{ fontSize: "24px", fontWeight: "bold" }}
+                          className="fw-bold"
+                          style={{ fontSize: "", fontWeight: "bold" }}
                         >
-                          {userName || ""}
+                          {userName || ""} ,
                         </span>
                       </div>
                       <h4>
                         <Button
                           variant="solid"
                           color=""
-                          className="mr-3 p-3"
                           onClick={logoutHandler}
                         >
                           Logout
                           <i class="fa-solid fa-user fa-xl"></i>
                         </Button>
                       </h4>
-                      {/* <Button
-                        variant="solid"
-                        color=""
-                        className="mr-3 p-3"
-                        onClick={setIsLogin}
-                      >
-                        Sign Out
-                        <i class="fa-solid fa-user fa-xl"></i>
-                      </Button> */}
-                    </>
+
+                      {isLogin && (
+                        <Modal open={isLogin}
+                          footer={null}
+                          closable
+                          onCancel={() => setIsLogin(false)}
+                        >
+                          <Result
+                            status="warning"
+                            title="Are you sure you want sign out?"
+                            extra={[
+                              <Button variant="solid" color="primary" onClick={removeAccountHandler}>Yes</Button>,
+                              <Button variant="solid" color="danger" onClick={() => setIsLogin(false)}>No</Button>
+
+                            ]}
+                          />
+                        </Modal>
+                      )}
+                    </div>
                   )}
                   <h4>
                     {/* <Link to='/' className='titleNav'> */}
@@ -120,7 +128,7 @@ const NavBar = () => {
             </div>
           </div>
         </article>
-      </section>
+      </section >
       {storeflag && (
         <Modal
           open={storeflag}
@@ -134,20 +142,23 @@ const NavBar = () => {
             title="404"
           />
         </Modal>
-      )}
-      {isSignUp ? (
-        <Modal
-          open={isSignUp}
-          footer={null}
-          closable
-          onCancel={() => setIsSignUp(false)}
-        >
-          <SignUpPage
-            onClose={() => setIsSignUp(false)}
-            setChecking={setChecking}
-          />
-        </Modal>
-      ) : null}
+      )
+      }
+      {
+        isSignUp ? (
+          <Modal
+            open={isSignUp}
+            footer={null}
+            closable
+            onCancel={() => setIsSignUp(false)}
+          >
+            <SignUpPage
+              onClose={() => setIsSignUp(false)}
+              setChecking={setChecking}
+            />
+          </Modal>
+        ) : null
+      }
 
       {/* {isLogin && (
         <Modal

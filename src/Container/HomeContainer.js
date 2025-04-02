@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import Home from "../components/redux_point/Home";
+import Home from "../components/CommercePages/Home";
 import {
   BrowserRouter,
   Route,
@@ -8,8 +8,8 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import ProductDetails from "../components/redux_point/ProductDetails";
-import NavBar from "../components/redux_point/NavBar";
+import ProductDetails from "../components/CommercePages/ProductDetails";
+import NavBar from "../components/CommercePages/NavBar";
 import ScrollToTop from "./ScrollTop";
 
 const HomeContainer = ({}) => {

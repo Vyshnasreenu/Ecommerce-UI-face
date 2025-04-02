@@ -54,33 +54,22 @@ const removeShopCart = (state, data) => {
 
 const viewProduct = (state, action) => {
   const updatedState = {
-    // ...state,
     prodcutDetails: action.payload,
-    // numberOfQuantity: state.numberOfQuantity + 1,
-    // priceOfProduct: state.priceOfProduct * 2,
   };
-  console.log(state);
-  sessionStorage.setItem("product", JSON.stringify(action.payload));
+  localStorage.setItem("product", JSON.stringify(action.payload))
   return updatedState;
 };
 
-export const selectProductReducer = (state = SELECTED_PRODUCT_INFO, action) => {
-  switch (action.type) {
-    case VIEW_CART:
-      return viewProduct(state, action.payload);
-    default: {
-      return state;
-    }
-  }
-};
+// export const selectProductReducer = (state = SELECTED_PRODUCT_INFO, action) => {
+//   switch (action.type) {
+//     case VIEW_CART:
+//       return viewProduct(state, action.payload);
+//     default: {
+//       return state;
+//     }
+//   }
+// };
 
-const viewProductSlice = createSlice({
-  name: "viewProductSlice",
-  SELECTED_PRODUCT_INFO,
-  reducers: {
-    viewProductDet: (state) => viewProduct(state),
-  },
-});
 
 const shoppingSlice = createSlice({
   name: "ShoppingSlice",
@@ -88,9 +77,9 @@ const shoppingSlice = createSlice({
   reducers: {
     addToCart: (state) => addshopcart(state),
     removeCart: (state) => removeShopCart(state),
-    viewProductDet: (state,action) => viewProduct(state, action),
+    viewProductDet: (state, action) => viewProduct(state, action),
   },
-});
+})
 
 export const { addToCart, removeCart, viewProductDet } = shoppingSlice.actions;
 
