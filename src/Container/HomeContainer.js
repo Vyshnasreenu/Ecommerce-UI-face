@@ -8,11 +8,12 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import ProductDetails from "../components/CommercePages/ProductDetails";
+import ProductDetails from "../components/CommercePages/ProductInfo/ProductDetails";
 import NavBar from "../components/CommercePages/NavBar";
 import ScrollToTop from "./ScrollTop";
+import StoreDetails from "../components/CommercePages/StoreCartDetails/StoreDetails";
 
-const HomeContainer = ({}) => {
+const HomeContainer = ({ }) => {
   return (
     <div>
       <BrowserRouter>
@@ -25,6 +26,15 @@ const HomeContainer = ({}) => {
               <>
                 <NavBar />
                 <ProductDetails />
+              </>
+            }
+          />
+          <Route
+            path="/productsStore"
+            element={
+              <>
+                <NavBar isFlag={true} />
+                <StoreDetails />
               </>
             }
           />

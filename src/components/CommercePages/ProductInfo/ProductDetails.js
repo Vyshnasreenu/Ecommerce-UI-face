@@ -1,24 +1,22 @@
-import { Button, Card, Col, Image, Modal, Result, Row, Spin } from "antd";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import ProductSpec from "./ProductSpec";
+import { Button, Card, Col, Image, Row, } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import ProductSpec from "../ProductInfo/ProductSpec";
+import { addToCart } from "../../../Service/reducers/shoppingSlices";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
-  const [loading, setLoading] = useState(true);
-  const [flag, setFlag] = useState(false);
+  let navgiation = useNavigate("")
 
-  const [prodcutDetails, setState] = useState(
-    useSelector((state) => state.shop.prodcutDetails)
-  );
+  const prodcutDetails = useSelector((state) => state.shop?.prodcutDetails)
+  const dispatch = useDispatch()
+
+
   const onMsgShower = () => {
-    setFlag(true);
+    dispatch(addToCart(prodcutDetails))
+    navgiation("/productsStore")
   };
-  useEffect(() => {
-    const data = localStorage.getItem("product");
-    if (data) {
-      setState(JSON.parse(data))
-    }
-  }, [])
+
+
 
   return (
     <div className="m-3">
@@ -50,14 +48,16 @@ const ProductDetails = () => {
                     <label>Price</label> : {prodcutDetails?.price}
                     <div className="">{prodcutDetails?.moreInfo}</div>
                     <div className="row p-3">
+                      {/* <Link> */}
                       <Button
                         className="bg-warning mx-2"
                         color="default"
                         variant="solid"
                         onClick={onMsgShower}
                       >
-                        Go To Cart
+                        Add To Cart
                       </Button>
+                      {/* </Link> */}
                       <Button
                         color="primary"
                         variant="solid"
@@ -71,7 +71,7 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-            {flag && (
+            {/* {flag && (
               <Modal
                 open={flag}
                 footer={null}
@@ -80,11 +80,11 @@ const ProductDetails = () => {
               >
                 <Result
                   status="404"
-                  subTitle="Sorry!, This page is currently under development...."
-                  title="404"
+                  subTitle="Sorry!, You must be logged in to view this page. Please Login to see the items you added previously."
+                  // title="Your Card Is empty, Missing Cart items?"
                 />
               </Modal>
-            )}
+            )} */}
           </Card>
         </Col>
       </Row>

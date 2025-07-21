@@ -90,7 +90,7 @@ const SignUpPage = ({ onClose, setChecking }) => {
   }
 
   return (
-    <div>
+    <div style={{ backgroundImage: "url(/images/Login/login1.png)", backgroundSize: "cover", }}>
       <p>
         {!isLogin ? (
           <h6>Already have an account ? Please

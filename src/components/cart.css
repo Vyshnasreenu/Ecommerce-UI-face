@@ -24,3 +24,12 @@
 .card-content {
     border: 1px groove white;
 }
+
+.storeCard{
+    height: 90vh;
+    background-color: #eff3f7;
+}
+.storeCardItems{
+    height:700px;
+    overflow: auto;
+}
