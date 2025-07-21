@@ -1,5 +1,5 @@
 import { Card, Row, Col, } from "antd";
-import { mobileProducts } from "./productsStore";
+import { mobileProducts } from "./ProductInfo/productsStore";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -12,7 +12,7 @@ const DashBoard = ({ products }) => {
 
   return (
     <>
-      <main className="mt-3" style={{ background: "" }}>
+      <main className="mt-3 " style={{ background: "#eff3f7" }}>
         {/* {loading && <Spin size='large' fullscreen tip="Loading...." />} */}
 
         <div className="m-2 p-2">

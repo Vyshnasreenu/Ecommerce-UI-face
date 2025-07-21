@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "../cart.css";
-import { Button, Modal, Result } from "antd";
+import { Avatar, Badge, Button, Modal, Result } from "antd";
 import { Link } from "react-router-dom";
-import SignUpPage from "../SignUpFiles/SignUpPage";
+import SignUpPage from "../CommercePages/SignUpFiles/SignUpPage";
+import { useDispatch, useSelector } from "react-redux";
 
-const NavBar = () => {
-  // const storeField = useSelector((state) => state.details.storeField);
-  const [storeflag, setStoreFlag] = useState(false);
-  const [checking, setChecking] = useState(false);
+const NavBar = ({ isFlag }) => {
+  const [checking, setChecking] = useState(false)
+
+  const productState = useSelector((state) => state.shop)
+  const dispatch = useDispatch()
   const [isLogin, setIsLogin] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
   const [userName, setUserName] = useState("");
   useEffect(() => {
     const name = sessionStorage.getItem("username");
-    console.log(name)
     if (name !== null) {
       setUserName(name);
       setChecking(true);
@@ -23,19 +24,19 @@ const NavBar = () => {
 
   const signUpHandler = () => {
     setIsSignUp(true);
-    // window.location.reload(false);
   };
 
   const logoutHandler = () => {
     setIsLogin(true);
-    // sessionStorage.removeItem("username");
-    // window.location.reload(false);
   };
+
 
   const removeAccountHandler = () => {
     sessionStorage.removeItem("username");
     window.location.reload(false);
   }
+
+
   return (
     <>
       <section className="parentNav">
@@ -51,7 +52,7 @@ const NavBar = () => {
                     </Link>
                   </span>
                 </h3>
-                <div className="col-md-6 text-right mt-3">
+                <div className="col-md-6 d-flex justify-content-end mt-3">
                   {!checking ? (
                     <h4>
                       <Button
@@ -79,6 +80,7 @@ const NavBar = () => {
                         <Button
                           variant="solid"
                           color=""
+                          className="mr-2"
                           onClick={logoutHandler}
                         >
                           Logout
@@ -105,45 +107,26 @@ const NavBar = () => {
                       )}
                     </div>
                   )}
-                  <h4>
-                    {/* <Link to='/' className='titleNav'> */}
-                    {/* <Button
-                      className="p-3"
-                      variant="solid"
-                      onClick={() => {
-                        setStoreFlag(true);
-                      }}
-                    >
-                      Store */}
-                    {/* <Badge count={itemCount || 0} className='ml-2' color=''>
-                                                <Avatar shape='square' size="large" icon={
-                                                    } />
-                                                    </Badge> */}
-                    {/* <i class="fa-solid fa-cart-shopping fa-xl"></i>
-                    </Button> */}
-                    {/* </Link> */}
-                  </h4>
+                  {!isFlag ? (
+                    <h4 className="">
+                      <Link to='/productsStore'>
+                        <Button
+                          className="p-3 active"
+                        >
+                          Store
+                          <Badge className='ml-' color='' count={productState.itemIncreament}>
+                            <Avatar shape='square' size="small" icon={<i class="fa-solid fa-cart-shopping fa-md"></i>} />
+                          </Badge>
+                        </Button>
+                      </Link>
+                    </h4>
+                  ) : null}
                 </div>
               </div>
             </div>
           </div>
         </article>
       </section >
-      {storeflag && (
-        <Modal
-          open={storeflag}
-          footer={null}
-          closable
-          onCancel={() => setStoreFlag(false)}
-        >
-          <Result
-            status="404"
-            subTitle="Sorry!, This page is currently under development...."
-            title="404"
-          />
-        </Modal>
-      )
-      }
       {
         isSignUp ? (
           <Modal
@@ -159,17 +142,6 @@ const NavBar = () => {
           </Modal>
         ) : null
       }
-
-      {/* {isLogin && (
-        <Modal
-          open={isLogin}
-          footer={null}
-          closable
-          onCancel={() => setIsLogin(false)}
-        >
-          <Login />
-        </Modal>
-      )} */}
     </>
   );
 };

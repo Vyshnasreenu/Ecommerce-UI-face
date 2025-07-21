@@ -8,7 +8,7 @@ export const mobileProducts = [
         image: "/images/Mobiles/image.png",
         price: "90000",
         count: 0,
-        description: "This samsung galaxy take pictures good quality",
+        description: "This samsung galaxy take pictures good quality, The Samsung Galaxy S23 Ultra is a flagship smartphone ",
 
         moreInfo: "The Samsung Galaxy S23 Ultra is a flagship smartphone that combines top-notch hardware, cutting-edge technology, and a premium design. It is tailored for users seeking high performance, excellent photography capabilities, and advanced features.",
         ProcessorAndPerformance: {

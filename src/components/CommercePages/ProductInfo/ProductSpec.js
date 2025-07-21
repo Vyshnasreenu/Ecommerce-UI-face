@@ -7,7 +7,6 @@ const ProductSpec = () => {
     useEffect(() => {
         const data = localStorage.getItem("product");
         if (data) {
-            console.log("first")
             setState(JSON.parse(data))
         }
     }, [])
