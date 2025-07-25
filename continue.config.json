@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/continuedev/continue/main/website/static/schema.json",
+  "models": [
+    {
+      "title": "Phi-3 Mini (Ollama)",
+      "provider": "ollama",
+      "model": "phi3:mini"
+    }
+  ]
+}
+
+
